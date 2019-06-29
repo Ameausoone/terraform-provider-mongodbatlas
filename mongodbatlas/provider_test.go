@@ -11,6 +11,7 @@ import (
 var testAccProviders map[string]terraform.ResourceProvider
 var testAccProvider *schema.Provider
 var testAccMongodbAtlasOrgId string
+var testAccMongodbAtlasProjectId string
 
 func init() {
 	testAccProvider = Provider().(*schema.Provider)
@@ -35,5 +36,9 @@ func testAccPreCheck(t *testing.T) {
 	if testAccMongodbAtlasOrgId = os.Getenv("MONGODB_ATLAS_TESTACC_ORG_ID"); testAccMongodbAtlasOrgId == "" {
 		// default org_id
 		testAccMongodbAtlasOrgId = "5b71ff2f96e82120d0aaec14"
+	}
+	if testAccMongodbAtlasProjectId = os.Getenv("MONGODB_ATLAS_TESTACC_PROJECT_ID"); testAccMongodbAtlasProjectId == "" {
+		// default org_id
+		testAccMongodbAtlasProjectId = "5b71ff2f96e82120d0aaec14"
 	}
 }

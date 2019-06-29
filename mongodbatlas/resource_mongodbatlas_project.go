@@ -14,7 +14,7 @@ func resourceProject() *schema.Resource {
 		Read:   resourceProjectRead,
 		Delete: resourceProjectDelete,
 		Importer: &schema.ResourceImporter{
-			State: schema.ImportStatePassthrough,
+			State: resourceProjectImportState,
 		},
 
 		Schema: map[string]*schema.Schema{
@@ -96,4 +96,30 @@ func resourceProjectDelete(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	return nil
+}
+
+func resourceProjectImportState(d *schema.ResourceData, meta interface{}) ([]*schema.ResourceData, error) {
+	client := meta.(*ma.Client)
+
+	p, _, err := client.Projects.Get(d.Id())
+
+	if err != nil {
+		return nil, fmt.Errorf("Couldn't import project %s, error: %s", d.Id(), err.Error())
+	}
+
+	d.SetId(p.ID)
+
+	if err := d.Set("org_id", p.OrgID); err != nil {
+		log.Printf("[WARN] Error importing org_id for (%s): %s", d.Id(), err)
+	}
+	if err := d.Set("name", p.Name); err != nil {
+		log.Printf("[WARN] Error importing name for (%s): %s", d.Id(), err)
+	}
+	if err := d.Set("created", p.Created); err != nil {
+		log.Printf("[WARN] Error importing created for (%s): %s", d.Id(), err)
+	}
+	if err := d.Set("cluster_count", p.ClusterCount); err != nil {
+		log.Printf("[WARN] Error importing cluster_count for (%s): %s", d.Id(), err)
+	}
+	return []*schema.ResourceData{d}, nil
 }

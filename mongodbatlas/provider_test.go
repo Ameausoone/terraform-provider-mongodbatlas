@@ -10,6 +10,7 @@ import (
 
 var testAccProviders map[string]terraform.ResourceProvider
 var testAccProvider *schema.Provider
+var testAccMongodbAtlasOrgId string
 
 func init() {
 	testAccProvider = Provider().(*schema.Provider)
@@ -30,5 +31,9 @@ func testAccPreCheck(t *testing.T) {
 		if v := os.Getenv("MONGODB_ATLAS_API_KEY"); v == "" {
 			t.Fatal("MONGODB_ATLAS_API_KEY must be set for acceptance tests")
 		}
+	}
+	if testAccMongodbAtlasOrgId = os.Getenv("MONGODB_ATLAS_TESTACC_ORG_ID"); testAccMongodbAtlasOrgId == "" {
+		// default org_id
+		testAccMongodbAtlasOrgId = "5b71ff2f96e82120d0aaec14"
 	}
 }

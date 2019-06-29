@@ -30,7 +30,7 @@ func TestAccMongodbatlasProject_basic(t *testing.T) {
 
 func testAccMongodbatlasProject(projectName string) string {
 	return fmt.Sprintf(`resource "mongodbatlas_project" "test" {
-  org_id = "5b71ff2f96e82120d0aaec14"
+  org_id = "%s"
   name = "%s"
 }`, projectName)
 }

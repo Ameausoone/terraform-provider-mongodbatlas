@@ -11,7 +11,21 @@ Terraform provider for [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 -	[Go](https://golang.org/doc/install) 1.12 (to build the provider plugin)
 
 ## Installing the Provider
-Follow the instructions to [install it as a plugin](https://www.terraform.io/docs/plugins/basics.html#installing-a-plugin). After placing it into your plugins directory, run `terraform init` to initialize it.
+
+Download provider on github : 
+
+```bash
+#for OSX
+wget -O ~/.terraform.d/plugins/terraform-provider-mongodbatlas_v1.1.0 https://github.com/akshaykarle/terraform-provider-mongodbatlas/releases/download/v1.1.0/terraform-provider-mongodbatlas_v1.1.0_darwin_amd64
+
+#for Windows 
+wget -O ~/.terraform.d/plugins/terraform-provider-mongodbatlas_v1.1.0 https://github.com/akshaykarle/terraform-provider-mongodbatlas/releases/download/v1.1.0/terraform-provider-mongodbatlas_v1.1.0_windows_amd64
+
+#for Linux 
+wget -O ~/.terraform.d/plugins/terraform-provider-mongodbatlas_v1.1.0 https://github.com/akshaykarle/terraform-provider-mongodbatlas/releases/download/v1.1.0/terraform-provider-mongodbatlas_v1.1.0_linux_amd64
+```
+
+Then run `terraform init` to initialize it.
 
 ## Usage
 ```
